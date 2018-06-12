@@ -1,21 +1,40 @@
 #include<iostream>
-#include<algorithm>
+#include<vector>
+#include<map>
 using namespace std;
-int length(char* str);
+vector<string> letterCombinations(string digits);
+
 int main()
 {
-	char* str = "12345";
-	cout<<length(str);
+	letterCombinations("23");
 	return 0;
 }
-int length(char* str)
+
+vector<string> letterCombinations(string digits)
 {
-	if (*str == '\0')
+	vector<string> retCombine;
+	if (digits.empty())
 	{
-		return 0;
+		return retCombine;
 	}
-	else
+	map<char, string> dial = { { '2',"abc" },{ '3',"def" },{ '4',"ghi" },{ '5',"jkl" },{ '6',"mno" },{ '7',"pqrs" },{ '8',"tuv", },{ '9',"wxyz" } };
+	int allSteps = 1;
+	for (int i = 0; i < digits.size(); i++)
 	{
-		return length(++str) + 1;
+		allSteps *= dial[digits[i]].size();
 	}
+	for (int i = 0; i < allSteps; i++)
+	{
+		int step = allSteps;
+		string tempStr = "";
+		for (int j = 0; j < digits.size(); j++)
+		{
+			step /= dial[digits[j]].size();
+			int pos = i / step % dial[digits[j]].size();
+			tempStr += dial[digits[j]][pos];
+		}
+		retCombine.push_back(tempStr);
+		tempStr = "";
+	}
+	return retCombine;
 }
