@@ -1,0 +1,57 @@
+//求有序数组中target的最小下标记,如nums=[5,7,7,8,8,10],target = 8，得到8的最小下表为3
+while (low <= heigh)
+{
+	middle = (low + heigh) / 2;
+	if (target <= nums[middle])
+	{
+		heigh = middle - 1;
+	}
+	else
+	{
+		low = middle + 1;
+	}
+}
+return low;
+
+同理: 最大下标
+while (low <= heigh)
+{
+	middle = (low + heigh) / 2;
+	if (target >= nums[middle])
+	{
+		low= middle + 1;
+	}
+	else
+	{
+		heigh= middle - 1;
+	}
+}
+return heigh;
+类似nums[0,0,0,1,1,2,3,4,5] target=0 得到pos=2
+while (low <= heigh)
+{
+	middle = (low + heigh) / 2;
+	if (target == nums[middle])
+	{
+		low = middle+1;
+	}
+	else
+	{
+		heigh = middle - 1;
+	}
+}
+return heigh;
+同理类似nums[0,1,2,3,3,3,3,3] target=3 得到pos=3
+while (low < heigh)
+{
+	middle = (low + heigh) / 2;
+	if (target == nums[middle])
+	{
+		heigh = middle;
+	}
+	else
+	{
+		slow = middle + 1;
+	}
+}
+return low;
